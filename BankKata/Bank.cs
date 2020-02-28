@@ -3,23 +3,29 @@ namespace BankKata
 {
     public class Bank
     {
-        public Bank()
+        private readonly ITransactionRepository _transactionRepository;
+        private readonly IStatementPrinter _statementPrinter;
+
+        public Bank(ITransactionRepository transactionRepository, IStatementPrinter statementPrinter)
         {
+            _transactionRepository = transactionRepository;
+            _statementPrinter = statementPrinter;
         }
 
-        public void deposit(int amount)
+        public void Deposit(int amount)
         {
-            throw new NotImplementedException();
+            _transactionRepository.SaveDeposit(amount);
         }
 
-        public void withdraw(int amount)
+        public void Withdraw(int amount)
         {
-            throw new NotImplementedException();
+            _transactionRepository.SaveWithdrawal(amount);
         }
 
-        public void printStatement()
+        public void PrintStatement()
         {
-            throw new NotImplementedException();
+            var transactions = _transactionRepository.GetTransactions();
+            _statementPrinter.PrintStatement(transactions);
         }
     }
 }

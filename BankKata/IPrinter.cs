@@ -1,9 +1,8 @@
-﻿using System;
-namespace BankKata
+﻿namespace BankKata
 {
-    public interface Printer
+    public interface IPrinter
     {
-
+        void Print(string line);
 
     }
 }
